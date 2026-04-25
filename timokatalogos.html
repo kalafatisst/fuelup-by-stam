@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Τιμοκατάλογος — Nutrition Coaching</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --cream: #f7f3ec;
+  --warm: #ede6d8;
+  --sand: #d4c5a9;
+  --brown: #8b6f47;
+  --dark: #2c2318;
+  --olive: #6b7c4a;
+  --olive-light: #8fa660;
+  --rust: #b85c38;
+  --text: #3a2e1e;
+  --muted: #9a8a72;
+  --gold: #c8a45a;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 24px;
+  position: relative;
+  background: var(--dark);
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse 80% 60% at 20% 80%, rgba(107,124,74,0.25) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(200,164,90,0.15) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 40% at 50% 50%, rgba(184,92,56,0.08) 0%, transparent 60%);
+}
+
+.hero-grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+.hero-line {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent, var(--gold));
+  margin: 0 auto 32px;
+  animation: fadeDown 1s ease forwards;
+  opacity: 0;
+  animation-delay: 0.2s;
+}
+
+.hero-tag {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 24px;
+  animation: fadeUp 0.8s ease forwards;
+  opacity: 0;
+  animation-delay: 0.4s;
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(52px, 8vw, 96px);
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1;
+  letter-spacing: -1px;
+  margin-bottom: 12px;
+  animation: fadeUp 0.8s ease forwards;
+  opacity: 0;
+  animation-delay: 0.6s;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.hero-sub {
+  font-size: 15px;
+  font-weight: 300;
+  color: rgba(247,243,236,0.55);
+  letter-spacing: 1px;
+  margin-bottom: 48px;
+  animation: fadeUp 0.8s ease forwards;
+  opacity: 0;
+  animation-delay: 0.8s;
+}
+
+.hero-scroll {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  animation: fadeUp 0.8s ease forwards;
+  opacity: 0;
+  animation-delay: 1s;
+  text-decoration: none;
+}
+
+.hero-scroll span {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.scroll-arrow {
+  width: 20px;
+  height: 20px;
+  border-right: 1px solid var(--gold);
+  border-bottom: 1px solid var(--gold);
+  transform: rotate(45deg);
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: rotate(45deg) translateY(0); }
+  50% { transform: rotate(45deg) translateY(4px); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: scaleY(0); transform-origin: top; }
+  to { opacity: 1; transform: scaleY(1); }
+}
+
+/* INTRO */
+.intro {
+  padding: 100px 24px;
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.intro-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--olive);
+  margin-bottom: 20px;
+}
+
+.intro-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(26px, 4vw, 38px);
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--dark);
+}
+
+.intro-text strong {
+  font-weight: 600;
+  color: var(--brown);
+}
+
+.divider {
+  width: 60px;
+  height: 1px;
+  background: var(--sand);
+  margin: 40px auto;
+}
+
+/* PACKAGES */
+.packages {
+  padding: 0 24px 100px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.packages-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--sand);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.package-card {
+  padding: 48px 36px;
+  border-right: 1px solid var(--sand);
+  position: relative;
+  transition: background 0.3s;
+}
+
+.package-card:last-child { border-right: none; }
+
+.package-card.featured {
+  background: var(--dark);
+}
+
+.package-card:not(.featured):hover {
+  background: var(--warm);
+}
+
+.pkg-badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 20px;
+  margin-bottom: 28px;
+}
+
+.pkg-badge.basic { background: var(--warm); color: var(--brown); border: 1px solid var(--sand); }
+.pkg-badge.popular { background: var(--olive); color: white; }
+.pkg-badge.premium { background: var(--warm); color: var(--dark); border: 1px solid var(--sand); }
+
+.package-card.featured .pkg-badge.popular {
+  background: var(--gold);
+  color: var(--dark);
+}
+
+.pkg-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--dark);
+}
+
+.package-card.featured .pkg-name { color: var(--cream); }
+
+.pkg-tagline {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 300;
+  margin-bottom: 32px;
+  line-height: 1.5;
+}
+
+.package-card.featured .pkg-tagline { color: rgba(247,243,236,0.5); }
+
+.pkg-price-wrap {
+  margin-bottom: 36px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--sand);
+}
+
+.package-card.featured .pkg-price-wrap { border-bottom-color: rgba(212,197,169,0.2); }
+
+.pkg-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 58px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--dark);
+  letter-spacing: -2px;
+}
+
+.package-card.featured .pkg-price { color: var(--gold); }
+
+.pkg-price sup {
+  font-size: 24px;
+  font-weight: 300;
+  vertical-align: super;
+  letter-spacing: 0;
+}
+
+.pkg-period {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 6px;
+  letter-spacing: 1px;
+}
+
+.package-card.featured .pkg-period { color: rgba(247,243,236,0.4); }
+
+.pkg-features {
+  list-style: none;
+  margin-bottom: 36px;
+}
+
+.pkg-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 9px 0;
+  font-size: 13.5px;
+  font-weight: 300;
+  color: var(--text);
+  border-bottom: 1px solid rgba(212,197,169,0.3);
+  line-height: 1.4;
+}
+
+.package-card.featured .pkg-features li { color: rgba(247,243,236,0.75); border-bottom-color: rgba(212,197,169,0.1); }
+
+.pkg-features li:last-child { border-bottom: none; }
+
+.feat-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--olive-light);
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+.package-card.featured .feat-dot { background: var(--gold); }
+
+.pkg-cta {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  text-align: center;
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: all 0.25s;
+}
+
+.pkg-cta.outline {
+  background: transparent;
+  border: 1.5px solid var(--sand);
+  color: var(--brown);
+}
+
+.pkg-cta.outline:hover {
+  background: var(--dark);
+  border-color: var(--dark);
+  color: var(--cream);
+}
+
+.pkg-cta.solid {
+  background: var(--gold);
+  color: var(--dark);
+}
+
+.pkg-cta.solid:hover {
+  background: #d4af6a;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(200,164,90,0.3);
+}
+
+.pkg-cta.dark-outline {
+  background: transparent;
+  border: 1.5px solid rgba(212,197,169,0.3);
+  color: var(--cream);
+}
+
+.pkg-cta.dark-outline:hover {
+  background: rgba(212,197,169,0.1);
+}
+
+/* WHAT'S INCLUDED */
+.included {
+  padding: 100px 24px;
+  background: var(--dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.included::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 90% 50%, rgba(107,124,74,0.15) 0%, transparent 60%);
+}
+
+.included-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.included-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.included-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(34px, 5vw, 54px);
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1.2;
+}
+
+.included-title em { font-style: italic; color: var(--gold); }
+
+.included-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: rgba(212,197,169,0.1);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.incl-item {
+  background: rgba(44,35,24,0.8);
+  padding: 32px 28px;
+  transition: background 0.2s;
+}
+
+.incl-item:hover { background: rgba(44,35,24,0.4); }
+
+.incl-icon {
+  font-size: 28px;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.incl-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--cream);
+  margin-bottom: 8px;
+}
+
+.incl-desc {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(247,243,236,0.5);
+  line-height: 1.6;
+}
+
+/* FAQ */
+.faq {
+  padding: 100px 24px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.faq-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 56px;
+  color: var(--dark);
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--sand);
+  padding: 24px 0;
+  cursor: pointer;
+}
+
+.faq-q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--dark);
+  gap: 16px;
+}
+
+.faq-icon {
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--sand);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+  color: var(--brown);
+  transition: all 0.2s;
+}
+
+.faq-item.open .faq-icon {
+  background: var(--dark);
+  border-color: var(--dark);
+  color: var(--cream);
+  transform: rotate(45deg);
+}
+
+.faq-a {
+  font-size: 13.5px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.7;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding-top 0.2s;
+}
+
+.faq-item.open .faq-a {
+  max-height: 200px;
+  padding-top: 14px;
+}
+
+/* CTA FOOTER */
+.cta-footer {
+  padding: 100px 24px;
+  background: var(--olive);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 80% at 50% 100%, rgba(0,0,0,0.2) 0%, transparent 70%);
+}
+
+.cta-footer-inner { position: relative; }
+
+.cta-footer-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 5vw, 60px);
+  font-weight: 300;
+  color: white;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.cta-footer-title em { font-style: italic; }
+
+.cta-footer-sub {
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 40px;
+  letter-spacing: 0.5px;
+}
+
+.cta-btns {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-white {
+  padding: 15px 36px;
+  background: white;
+  color: var(--olive);
+  border: none;
+  border-radius: 10px;
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+
+.btn-outline-white {
+  padding: 15px 36px;
+  background: transparent;
+  color: white;
+  border: 1.5px solid rgba(255,255,255,0.4);
+  border-radius: 10px;
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-outline-white:hover { background: rgba(255,255,255,0.1); border-color: white; }
+
+/* FOOTER */
+.footer {
+  padding: 32px 24px;
+  text-align: center;
+  background: var(--dark);
+}
+
+.footer-text {
+  font-size: 12px;
+  color: rgba(247,243,236,0.25);
+  letter-spacing: 1px;
+}
+
+/* DISCLAIMER */
+.disclaimer {
+  padding: 40px 24px;
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.disclaimer p {
+  font-size: 11.5px;
+  color: var(--muted);
+  line-height: 1.7;
+  font-style: italic;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .packages-grid {
+    grid-template-columns: 1fr;
+    border-radius: 16px;
+  }
+  .package-card { border-right: none; border-bottom: 1px solid var(--sand); }
+  .package-card:last-child { border-bottom: none; }
+  .included-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 600px) {
+  .included-grid { grid-template-columns: 1fr; }
+  .package-card { padding: 36px 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-line"></div>
+  <div class="hero-tag">FuelUp by Stam</div>
+  <h1 class="hero-title">Διατροφή<br><em>που δουλεύει.</em></h1>
+  <p class="hero-sub">Εξατομικευμένα πλάνα · Αθλητική διατροφή · Πιστοποιημένος Σύμβουλος</p>
+  <a href="#packages" class="hero-scroll">
+    <span>Δες τα πακέτα</span>
+    <div class="scroll-arrow"></div>
+  </a>
+</section>
+
+<!-- INTRO -->
+<section class="intro">
+  <div class="intro-label">Η φιλοσοφία μου</div>
+  <p class="intro-text">
+    Δεν πιστεύω σε <strong>γενικές δίαιτες</strong>.<br>
+    Πιστεύω σε πλάνα που σχεδιάζονται <strong>για σένα</strong> — βάσει του σώματός σου, των στόχων σου και της ζωής σου.
+  </p>
+  <div class="divider"></div>
+  <p style="font-size:13.5px;color:var(--muted);font-weight:300;line-height:1.8">
+    Πιστοποιημένος Ειδικός Εφαρμογών Διαιτητικής — Επίπεδο 5 · 10+ χρόνια εμπειρίας<br>
+    Εξειδίκευση στην Αθλητική Διατροφή · Online Coaching
+  </p>
+</section>
+
+<!-- PACKAGES -->
+<section class="packages" id="packages">
+  <div class="section-label">Πακέτα Συνεργασίας</div>
+
+  <div class="packages-grid">
+
+    <!-- KICKSTART -->
+    <div class="package-card">
+      <span class="pkg-badge basic">Εκκίνηση</span>
+      <h2 class="pkg-name">Kickstart</h2>
+      <p class="pkg-tagline">Για όσους θέλουν να ξεκινήσουν σωστά χωρίς μεγάλη δέσμευση.</p>
+      <div class="pkg-price-wrap">
+        <div class="pkg-price"><sup>€</sup>97</div>
+        <div class="pkg-period">ανά μήνα</div>
+      </div>
+      <ul class="pkg-features">
+        <li><span class="feat-dot"></span>Εξατομικευμένο διατροφικό πλάνο 7 ημερών</li>
+        <li><span class="feat-dot"></span>Αρχική αξιολόγηση & ανάλυση στόχων</li>
+        <li><span class="feat-dot"></span>1 εβδομαδιαίο check-in μέσω μηνύματος</li>
+        <li><span class="feat-dot"></span>Λίστα αγορών & οδηγός γευμάτων PDF</li>
+        <li><span class="feat-dot"></span>Υποστήριξη chat (απάντηση εντός 24ω)</li>
+        <li><span class="feat-dot"></span>Συστάσεις supplements αν χρειάζεται</li>
+      </ul>
+      <a href="#contact" class="pkg-cta outline">Ξεκινάμε</a>
+    </div>
+
+    <!-- TRANSFORM -->
+    <div class="package-card featured">
+      <span class="pkg-badge popular">⭐ Δημοφιλές</span>
+      <h2 class="pkg-name">Transform</h2>
+      <p class="pkg-tagline">Για συγκεκριμένο στόχο: απώλεια βάρους, μυϊκή ανάπτυξη ή ενέργεια.</p>
+      <div class="pkg-price-wrap">
+        <div class="pkg-price"><sup>€</sup>197</div>
+        <div class="pkg-period">ανά μήνα</div>
+      </div>
+      <ul class="pkg-features">
+        <li><span class="feat-dot"></span>Πλήρης αξιολόγηση σώματος & στόχων</li>
+        <li><span class="feat-dot"></span>Εξατομικευμένο πλάνο με εβδομαδιαία αναθεώρηση</li>
+        <li><span class="feat-dot"></span>2 video calls/μήνα (30 λεπτά το καθένα)</li>
+        <li><span class="feat-dot"></span>Αθλητική διατροφή αν χρειάζεται</li>
+        <li><span class="feat-dot"></span>Progress tracking & αναφορά προόδου</li>
+        <li><span class="feat-dot"></span>Υποστήριξη chat 5 ημέρες/εβδομάδα</li>
+        <li><span class="feat-dot"></span>Συστάσεις supplements εξατομικευμένες</li>
+      </ul>
+      <a href="#contact" class="pkg-cta solid">Ξεκινάμε</a>
+    </div>
+
+    <!-- ELITE -->
+    <div class="package-card">
+      <span class="pkg-badge premium">Elite</span>
+      <h2 class="pkg-name">Elite VIP</h2>
+      <p class="pkg-tagline">Για αθλητές και όσους θέλουν premium, εντατική καθοδήγηση.</p>
+      <div class="pkg-price-wrap">
+        <div class="pkg-price"><sup>€</sup>397</div>
+        <div class="pkg-period">ανά μήνα</div>
+      </div>
+      <ul class="pkg-features">
+        <li><span class="feat-dot"></span>Όλα του Transform, και επιπλέον:</li>
+        <li><span class="feat-dot"></span>4 video calls/μήνα (30 λεπτά το καθένα)</li>
+        <li><span class="feat-dot"></span>Εξειδικευμένη αθλητική διατροφή & περιοδοποίηση</li>
+        <li><span class="feat-dot"></span>Pre/post workout meal timing</li>
+        <li><span class="feat-dot"></span>Άμεση επικοινωνία WhatsApp (εντός 4 ωρών)</li>
+        <li><span class="feat-dot"></span>Μηνιαία αναφορά προόδου με ανάλυση</li>
+        <li><span class="feat-dot"></span>Προτεραιότητα σε νέα διαθεσιμότητα</li>
+      </ul>
+      <a href="#contact" class="pkg-cta outline">Ξεκινάμε</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHAT'S INCLUDED -->
+<section class="included">
+  <div class="included-inner">
+    <div class="included-header">
+      <div class="section-label" style="color:rgba(247,243,236,0.3);margin-bottom:16px">Τι περιλαμβάνει κάθε συνεργασία</div>
+      <h2 class="included-title">Η <em>μέθοδος</em> που<br>φέρνει αποτελέσματα</h2>
+    </div>
+    <div class="included-grid">
+      <div class="incl-item">
+        <span class="incl-icon">🎯</span>
+        <div class="incl-title">Εξατομίκευση</div>
+        <p class="incl-desc">Κάθε πλάνο φτιάχνεται από μηδέν για σένα. Βάρος, ύψος, στόχοι, προτιμήσεις, ρουτίνα.</p>
+      </div>
+      <div class="incl-item">
+        <span class="incl-icon">📊</span>
+        <div class="incl-title">Επιστημονική βάση</div>
+        <p class="incl-desc">BMR, TDEE, μακροθρεπτικά — όλα υπολογισμένα με επιστημονικές μεθόδους, όχι εμπειρικά.</p>
+      </div>
+      <div class="incl-item">
+        <span class="incl-icon">🥗</span>
+        <div class="incl-title">Ελληνική αγορά</div>
+        <p class="incl-desc">Τρόφιμα από κάθε σούπερ μάρκετ. Απλές συνταγές. Χωρίς εξωτικά υλικά.</p>
+      </div>
+      <div class="incl-item">
+        <span class="incl-icon">💪</span>
+        <div class="incl-title">Αθλητική διατροφή</div>
+        <p class="incl-desc">Pre/post workout γεύματα, carb cycling, meal timing για μέγιστη αθλητική απόδοση.</p>
+      </div>
+      <div class="incl-item">
+        <span class="incl-icon">💊</span>
+        <div class="incl-title">Supplements</div>
+        <p class="incl-desc">Συστάσεις μόνο όταν χρειάζεται — ποιο, γιατί, πότε. Χωρίς περιττά έξοδα.</p>
+      </div>
+      <div class="incl-item">
+        <span class="incl-icon">📱</span>
+        <div class="incl-title">Άμεση επικοινωνία</div>
+        <p class="incl-desc">WhatsApp, ερωτήσεις, υποστήριξη. Δεν μένεις ποτέ μόνος στη διαδικασία.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <h2 class="faq-title">Συχνές Ερωτήσεις</h2>
+
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>Τι διαφέρει ένας Σύμβουλος Διατροφής από έναν Διαιτολόγο;</span>
+      <div class="faq-icon">+</div>
+    </div>
+    <div class="faq-a">Ο Σύμβουλος Διατροφής (πιστοποίηση επιπέδου 5) παρέχει εξατομικευμένες διατροφικές συμβουλές και πλάνα για υγιή άτομα που θέλουν να βελτιώσουν τη διατροφή τους, να χάσουν βάρος ή να βελτιώσουν την αθλητική τους απόδοση. Δεν αντικαθιστά ιατρικές συμβουλές για παθολογικές καταστάσεις.</div>
+  </div>
+
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>Πώς γίνεται η επικοινωνία μας;</span>
+      <div class="faq-icon">+</div>
+    </div>
+    <div class="faq-a">Κυρίως μέσω WhatsApp για την καθημερινή επικοινωνία και ερωτήσεις, και μέσω video call (Google Meet ή Zoom) για τα sessions μας. Όλα online, από όπου κι αν βρίσκεσαι στην Ελλάδα ή Ευρώπη.</div>
+  </div>
+
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>Πόσο γρήγορα θα δω αποτελέσματα;</span>
+      <div class="faq-icon">+</div>
+    </div>
+    <div class="faq-a">Εξαρτάται από τον στόχο σου και τη συνέπειά σου. Συνήθως τις πρώτες 2-3 εβδομάδες παρατηρείς αλλαγές στην ενέργεια και την εστία σου, ενώ ορατά αποτελέσματα εμφανίζονται σε 4-8 εβδομάδες με συνεπή εφαρμογή.</div>
+  </div>
+
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>Μπορώ να αλλάξω πακέτο κατά τη διάρκεια;</span>
+      <div class="faq-icon">+</div>
+    </div>
+    <div class="faq-a">Φυσικά! Μπορείς να αναβαθμίσεις ή να υποβαθμίσεις το πακέτο σου οποιαδήποτε στιγμή με ισχύ από τον επόμενο μήνα. Δεν υπάρχουν κρυφές χρεώσεις ή δεσμεύσεις.</div>
+  </div>
+
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>Δουλεύεις μόνο με Έλληνες πελάτες;</span>
+      <div class="faq-icon">+</div>
+    </div>
+    <div class="faq-a">Όχι! Δουλεύω με Ελληνόφωνους σε όλη την Ευρώπη — Κύπρος, Γερμανία, Αγγλία, Αυστρία και αλλού. Όλη η συνεργασία γίνεται online οπότε η απόσταση δεν είναι εμπόδιο.</div>
+  </div>
+
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>Πώς πληρώνω;</span>
+      <div class="faq-icon">+</div>
+    </div>
+    <div class="faq-a">Μηνιαία συνδρομή μέσω τραπεζικής μεταφοράς ή PayPal. Δεν απαιτείται σύμβαση μακράς διάρκειας — πληρώνεις μήνα-μήνα και μπορείς να διακόψεις οποιαδήποτε στιγμή.</div>
+  </div>
+</section>
+
+<!-- DISCLAIMER -->
+<div class="disclaimer">
+  <p>* Οι υπηρεσίες παρέχονται από πιστοποιημένο Ειδικό Εφαρμογών Διαιτητικής Επιπέδου 5 και δεν υποκαθιστούν ιατρική γνωμάτευση ή συμβουλή διαιτολόγου-διατροφολόγου ΑΕΙ. Συστήνεται συνεννόηση με τον γιατρό σας για παθολογικές καταστάσεις.</p>
+</div>
+
+<!-- CTA FOOTER -->
+<section class="cta-footer" id="contact">
+  <div class="cta-footer-inner">
+    <h2 class="cta-footer-title">Έτοιμος να<br><em>αλλάξεις;</em></h2>
+    <p class="cta-footer-sub">Στείλε μου μήνυμα και ξεκινάμε με μια δωρεάν αξιολόγηση 15'</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/306948886830" class="btn-white">💬 WhatsApp</a>
+      <a href="https://paypal.me/StamatiosKalafatis" target="_blank" class="btn-outline-white">💳 PayPal</a>
+      <a href="https://www.instagram.com/fuelup_by_stam" class="btn-outline-white">📸 Instagram</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p class="footer-text">© 2026 · Nutrition Coaching · Πιστοποιημένος Σύμβουλος Διατροφής Επιπέδου 5</p>
+</footer>
+
+<script>
+function toggleFaq(el) {
+  const isOpen = el.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) el.classList.add('open');
+}
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
