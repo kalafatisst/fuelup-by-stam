@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FuelUp by Stam — Digital Business Card</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #f7f3ec;
+  --warm: #ede6d8;
+  --sand: #d4c5a9;
+  --brown: #8b6f47;
+  --dark: #2c2318;
+  --olive: #6b7c4a;
+  --olive-light: #8fa660;
+  --text: #3a2e1e;
+  --muted: #9a8a72;
+  --gold: #c8a45a;
+  --cream: #faf7f2;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 24px;
+  position: relative;
+  background: var(--dark);
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 80%, rgba(107,124,74,0.2) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(200,164,90,0.12) 0%, transparent 50%);
+}
+
+.hero-tag {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+  animation: fadeUp 0.8s ease 0.3s forwards;
+  opacity: 0;
+  position: relative;
+}
+
+.hero-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(56px, 10vw, 100px);
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1;
+  letter-spacing: -2px;
+  margin-bottom: 16px;
+  animation: fadeUp 0.8s ease 0.5s forwards;
+  opacity: 0;
+  position: relative;
+}
+
+.hero-name em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.hero-title {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(250,247,242,0.5);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  animation: fadeUp 0.8s ease 0.7s forwards;
+  opacity: 0;
+  position: relative;
+}
+
+.hero-badges {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeUp 0.8s ease 0.9s forwards;
+  opacity: 0;
+  position: relative;
+}
+
+.badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  border: 1px solid rgba(200,164,90,0.3);
+  color: var(--gold);
+  background: rgba(200,164,90,0.08);
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  animation: fadeUp 0.8s ease 1.1s forwards;
+  opacity: 0;
+}
+
+.scroll-hint span {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.scroll-arrow {
+  width: 18px;
+  height: 18px;
+  border-right: 1px solid var(--gold);
+  border-bottom: 1px solid var(--gold);
+  transform: rotate(45deg);
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%,100% { transform: rotate(45deg) translateY(0); }
+  50% { transform: rotate(45deg) translateY(5px); }
+}
+
+/* CONTACT SECTION */
+.contact {
+  padding: 80px 24px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.links-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 48px;
+}
+
+.link-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 20px 24px;
+  background: white;
+  border: 1px solid var(--sand);
+  border-radius: 16px;
+  text-decoration: none;
+  color: var(--text);
+  transition: all 0.25s;
+}
+
+.link-card:hover {
+  border-color: var(--brown);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(44,35,24,0.08);
+}
+
+.link-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.link-icon.ig  { background: rgba(225,48,108,0.08); }
+.link-icon.wa  { background: rgba(37,211,102,0.08); }
+.link-icon.mail{ background: rgba(74,144,240,0.08); }
+.link-icon.web { background: rgba(107,124,74,0.1);  }
+.link-icon.pay { background: rgba(0,48,135,0.08);   }
+
+.link-body { flex: 1; min-width: 0; }
+.link-name  { font-size: 14px; font-weight: 600; color: var(--dark); }
+.link-value { font-size: 12px; color: var(--muted); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.link-arrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  color: var(--sand);
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.link-card:hover .link-arrow {
+  color: var(--brown);
+  transform: translateX(3px);
+}
+
+/* DIVIDER */
+.divider {
+  width: 60px;
+  height: 1px;
+  background: var(--sand);
+  margin: 0 auto 48px;
+}
+
+/* BIO SECTION */
+.bio-section {
+  padding: 80px 24px;
+  background: var(--dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.bio-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 80% 50%, rgba(107,124,74,0.12) 0%, transparent 60%);
+}
+
+.bio-inner {
+  max-width: 640px;
+  margin: 0 auto;
+  position: relative;
+  text-align: center;
+}
+
+.bio-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1.3;
+  margin-bottom: 20px;
+}
+
+.bio-title em { font-style: italic; color: var(--gold); }
+
+.bio-text {
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(250,247,242,0.55);
+  line-height: 1.8;
+  margin-bottom: 36px;
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.stat-box {
+  background: rgba(255,255,255,0.04);
+  padding: 20px 16px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.stat-lbl {
+  font-size: 10px;
+  color: rgba(250,247,242,0.4);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+/* SHARE SECTION */
+.share-section {
+  padding: 60px 24px;
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.share-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--dark);
+  margin-bottom: 8px;
+}
+
+.share-sub {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+.share-box {
+  display: flex;
+  gap: 10px;
+  background: white;
+  border: 1px solid var(--sand);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  align-items: center;
+}
+
+.share-url {
+  flex: 1;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: 'Jost', monospace;
+}
+
+.copy-btn {
+  padding: 8px 16px;
+  background: var(--dark);
+  color: var(--cream);
+  border: none;
+  border-radius: 8px;
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.copy-btn:hover { background: var(--brown); }
+.copy-btn.copied { background: var(--olive); }
+
+.share-wa {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px;
+  background: #25d366;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.share-wa:hover { background: #20c55a; transform: translateY(-1px); }
+
+/* FOOTER */
+.footer {
+  padding: 28px 24px;
+  text-align: center;
+  background: var(--dark);
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.footer-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+
+.footer-copy {
+  font-size: 11px;
+  color: rgba(250,247,242,0.2);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 480px) {
+  .stats-row { grid-template-columns: 1fr 1fr 1fr; }
+  .link-card { padding: 16px 18px; gap: 14px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-tag">Digital Business Card</div>
+  <h1 class="hero-name">Σταμάτης<br><em>Καλαφάτης</em></h1>
+  <p class="hero-title">Σύμβουλος Διατροφής · Αθλητική Διατροφή</p>
+  <div class="hero-badges">
+    <span class="badge">📋 Επίπεδο 5</span>
+    <span class="badge">💪 Αθλητική Διατροφή</span>
+    <span class="badge">🌍 Online · Ελλάδα & Ευρώπη</span>
+  </div>
+  <div class="scroll-hint">
+    <span>Επικοινωνία</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- CONTACT LINKS -->
+<section class="contact">
+  <div class="section-label">Επικοινωνία & Links</div>
+  <div class="links-grid">
+
+    <a href="https://wa.me/306948886830" target="_blank" class="link-card">
+      <div class="link-icon wa">💬</div>
+      <div class="link-body">
+        <div class="link-name">WhatsApp</div>
+        <div class="link-value">+30 694 888 6830</div>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a href="https://www.instagram.com/fuelup_by_stam" target="_blank" class="link-card">
+      <div class="link-icon ig">📸</div>
+      <div class="link-body">
+        <div class="link-name">Instagram</div>
+        <div class="link-value">@fuelup_by_stam</div>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a href="https://calendly.com/kalafatisst/15-fuelup-by-stam" target="_blank" class="link-card">
+      <div class="link-icon web">📅</div>
+      <div class="link-body">
+        <div class="link-name">Κλείσε Δωρεάν Κλήση 15'</div>
+        <div class="link-value">calendly.com/kalafatisst</div>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a href="mailto:kalafatisst@gmail.com" class="link-card">
+      <div class="link-icon mail">📧</div>
+      <div class="link-body">
+        <div class="link-name">Email</div>
+        <div class="link-value">kalafatisst@gmail.com</div>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+    </div>
+</section>
+
+<!-- BIO -->
+<section class="bio-section">
+  <div class="bio-inner">
+    <div class="section-label" style="color:rgba(250,247,242,0.3);margin-bottom:24px;">Ποιος είμαι</div>
+    <h2 class="bio-title">Εξατομικευμένη διατροφή<br>που <em>πραγματικά δουλεύει.</em></h2>
+    <p class="bio-text">
+      Πιστοποιημένος Ειδικός Εφαρμογών Διαιτητικής Επιπέδου 5 με εξειδίκευση στην Αθλητική Διατροφή.
+      Δουλεύω με Ελληνόφωνους σε Ελλάδα, Κύπρο και Ευρώπη — 100% online.
+    </p>
+    <div class="stats-row">
+      <div class="stat-box">
+        <div class="stat-num">40+</div>
+        <div class="stat-lbl">Πελάτες</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">10+</div>
+        <div class="stat-lbl">Χρόνια εμπειρίας</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">100%</div>
+        <div class="stat-lbl">Online</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHARE -->
+<section class="share-section">
+  <h3 class="share-title">Μοιράσου την κάρτα</h3>
+  <p class="share-sub">Αντίγραψε το link ή στείλτο απευθείας μέσω WhatsApp</p>
+  <div class="share-box">
+    <span class="share-url" id="card-url">kalafatisst.github.io/fuelup-by-stam/business-card.html</span>
+    <button class="copy-btn" id="copy-btn" onclick="copyLink()">Αντιγραφή</button>
+  </div>
+  <a href="https://wa.me/?text=%CE%94%CE%B5%CF%82%20%CF%84%CE%B7%CE%BD%20%CE%B5%CF%80%CE%B1%CE%B3%CE%B3%CE%B5%CE%BB%CE%BC%CE%B1%CF%84%CE%B9%CE%BA%CE%AE%20%CE%BA%CE%AC%CF%81%CF%84%CE%B1%20%CE%BC%CE%BF%CF%85%3A%20https%3A%2F%2Fkalafatisst.github.io%2Ffuelup-by-stam%2Fbusiness-card.html" target="_blank" class="share-wa">
+    💬 Στείλε μέσω WhatsApp
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-brand">FuelUp by Stam</div>
+  <div class="footer-copy">© 2026 · Σύμβουλος Διατροφής Επιπέδου 5</div>
+</footer>
+
+<script>
+function copyLink() {
+  const url = 'https://kalafatisst.github.io/fuelup-by-stam/business-card.html';
+  const btn = document.getElementById('copy-btn');
+  navigator.clipboard.writeText(url).then(() => {
+    btn.textContent = '✅ Αντιγράφηκε!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Αντιγραφή';
+      btn.classList.remove('copied');
+    }, 2500);
+  }).catch(() => {
+    prompt('Αντίγραψε το link:', url);
+  });
+}
+</script>
+
+</body>
+</html>
